@@ -51,29 +51,29 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1492}
+      Script: {instanceID: 1494}
     - Class: 114
-      Script: {instanceID: 1630}
+      Script: {instanceID: 1632}
     - Class: 114
-      Script: {instanceID: 2160}
+      Script: {instanceID: 2162}
     - Class: 114
-      Script: {instanceID: 2222}
+      Script: {instanceID: 2224}
     - Class: 114
-      Script: {instanceID: 2642}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 2826}
+      Script: {instanceID: 2828}
     - Class: 114
-      Script: {instanceID: 3054}
+      Script: {instanceID: 3056}
     - Class: 114
-      Script: {instanceID: 3124}
+      Script: {instanceID: 3126}
     - Class: 114
-      Script: {instanceID: 3370}
+      Script: {instanceID: 3372}
     - Class: 114
-      Script: {instanceID: 3488}
+      Script: {instanceID: 3490}
     - Class: 114
-      Script: {instanceID: 3506}
+      Script: {instanceID: 3508}
     - Class: 114
-      Script: {instanceID: 3546}
+      Script: {instanceID: 3548}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -548,4 +548,4 @@ ScriptsOnlyBuild:
   platform: 9
   scenePathNames:
   - Assets/Scenes/scene.unity
-  playerPath: /Users/chandradhar/Desktop/ios builds
+  playerPath: /Users/chandradhar/Desktop/Builds/IOSBuild

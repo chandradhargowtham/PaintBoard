@@ -33,9 +33,6 @@ extern "C" void RegisterStaticallyLinkedModulesGranular()
 	void RegisterModule_RuntimeInitializeOnLoadManagerInitializer();
 	RegisterModule_RuntimeInitializeOnLoadManagerInitializer();
 
-	void RegisterModule_ScreenCapture();
-	RegisterModule_ScreenCapture();
-
 	void RegisterModule_TextRendering();
 	RegisterModule_TextRendering();
 

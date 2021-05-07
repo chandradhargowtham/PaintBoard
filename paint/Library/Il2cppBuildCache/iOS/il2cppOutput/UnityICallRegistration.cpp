@@ -1500,14 +1500,6 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : UnityEngine.Screen
 
-	//Start Registrations for type : UnityEngine.ScreenCapture
-
-		//UnityEngine.Texture2D UnityEngine.ScreenCapture::CaptureScreenshotAsTexture(System.Int32,UnityEngine.ScreenCapture/StereoScreenCaptureMode)
-		void Register_UnityEngine_ScreenCapture_CaptureScreenshotAsTexture();
-		Register_UnityEngine_ScreenCapture_CaptureScreenshotAsTexture();
-
-	//End Registrations for type : UnityEngine.ScreenCapture
-
 	//Start Registrations for type : UnityEngine.ScriptableObject
 
 		//System.Void UnityEngine.ScriptableObject::CreateScriptableObject(UnityEngine.ScriptableObject)
@@ -1802,6 +1794,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Texture_get_texelSize_Injected();
 		Register_UnityEngine_Texture_get_texelSize_Injected();
 
+		//System.Void UnityEngine.Texture::set_wrapMode(UnityEngine.TextureWrapMode)
+		void Register_UnityEngine_Texture_set_wrapMode();
+		Register_UnityEngine_Texture_set_wrapMode();
+
 		//UnityEngine.TextureWrapMode UnityEngine.Texture::get_wrapMode()
 		void Register_UnityEngine_Texture_get_wrapMode();
 		Register_UnityEngine_Texture_get_wrapMode();
@@ -1829,6 +1825,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Texture2D::ReadPixelsImpl_Injected(UnityEngine.Rect&,System.Int32,System.Int32,System.Boolean)
 		void Register_UnityEngine_Texture2D_ReadPixelsImpl_Injected();
 		Register_UnityEngine_Texture2D_ReadPixelsImpl_Injected();
+
+		//System.Void UnityEngine.Texture2D::SetPixelImpl_Injected(System.Int32,System.Int32,System.Int32,UnityEngine.Color&)
+		void Register_UnityEngine_Texture2D_SetPixelImpl_Injected();
+		Register_UnityEngine_Texture2D_SetPixelImpl_Injected();
 
 		//UnityEngine.Texture2D UnityEngine.Texture2D::get_whiteTexture()
 		void Register_UnityEngine_Texture2D_get_whiteTexture();

@@ -14,6 +14,7 @@ public class paintManager : MonoBehaviour
     int drawPoints;
     int noOfStrokes;
     public Button MenuSaveOption;
+    public Text saveConfirmText;
 
     // UI Items
     public GameObject MenuPanel;
@@ -83,6 +84,10 @@ public class paintManager : MonoBehaviour
     {
         MenuPanel.SetActive(false);
     }
+    void saveConfirm()
+    {
+        saveConfirmText.gameObject.SetActive(false);
+    }
     #endregion
     #region Save and Other Admin Functions
     public void saveFile()
@@ -112,21 +117,36 @@ public class paintManager : MonoBehaviour
         }
         ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures),
         "PaintBoard/"+fileName + ".png"));
+        
         Invoke("EnableMenu", 2);
+        //saveConfirmText.gameObject.SetActive(true);
+        //Invoke("saveConfirmS", 2);
+
 
 
 #elif UNITY_IOS
-        MenuPanel.SetActive(false);
+
         SavePanel.SetActive(false);
-        Invoke("wait", 2);
-        Texture2D ss = ScreenCapture.CaptureScreenshotAsTexture();  
+        
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+        Rect r = new Rect(0, 0, Screen.width, Screen.height / 1.2f);
+        
+        ss.ReadPixels(r, 0, 0);
+        ss.SetPixel(0, 0, Color.white);
+        ss.wrapMode=TextureWrapMode.Repeat;
+        ss.Apply();
+        
         // Save the screenshot to Gallery/Photos
-        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "Gallery", "PaintBoardImage.png", (success, path) => Debug.Log("Media save result: " + success + " " + path));
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "Gallery", "PaintBoardImage.jpg", (success, path) => Debug.Log("Media save result: " + success + " " + path));
         Debug.Log("Permission result: " + permission);
         // To avoid memory leaks
-        Destroy(ss);        
-        Invoke("EnableMenu", 4);
-        
+        Destroy(ss);
+        //saveConfirmText.gameObject.SetActive(true);
+        //Invoke("saveConfirm",2);
+#elif UNITY_EDITOR
+        Texture2D ss = ScreenCapture.CaptureScreenshotAsTexture();
+            
 #else
         ScreenCapture.CaptureScreenshot(fileName + ".png");
 #endif
