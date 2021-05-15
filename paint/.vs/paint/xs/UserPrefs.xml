@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{2B1F2D61-7736-4C5B-D015-9AEB37983771}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/paintManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/paintManager.cs" Line="145" Column="11" />
+      <File FileName="Assets/Scripts/paintManager.cs" Line="28" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2e6f464d-1d3a-4a3d-9fe7-b3a675e26fd3" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e5972321-951d-4a00-b823-6c79f5ba1c72" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

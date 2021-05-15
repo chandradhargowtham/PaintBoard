@@ -10,15 +10,24 @@ public class paintManager : MonoBehaviour
     public Material currentPen;
     public List<Material> penList;
     bool paintMode;
+    bool textMode;
     LineRenderer pen;
     int drawPoints;
     int noOfStrokes;
     public Button MenuSaveOption;
     public Text saveConfirmText;
 
+    // TextBox related vars
+    string textBoxText;
+    Vector3 textboxPosition;
+    public Texture2D textCursorTexture;
+    public Texture2D penCursorTexture;
+    Vector2 cursorHotspot = new Vector2(0, 31);
+
     // UI Items
     public GameObject MenuPanel;
     public GameObject SavePanel;
+    public GameObject TextBoxPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +44,53 @@ public class paintManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.T))
+        {
+            textMode = true;
+        }
+
+        if(textMode)
+        {
+            Cursor.SetCursor(textCursorTexture,cursorHotspot, CursorMode.Auto);
+            if (Input.GetMouseButton(0))
+            {
+                Debug.Log("Text");
+                
+                GameObject temp = new GameObject();
+                temp.gameObject.transform.parent= GameObject.Find("DrawContent").transform;
+                temp.gameObject.name = "TextBox";
+                temp.AddComponent<Canvas>();
+                temp.AddComponent<CanvasScaler>();
+                temp.AddComponent<GraphicRaycaster>();
+                Canvas c = temp.GetComponent<Canvas>(); 
+                c.renderMode = RenderMode.WorldSpace;
+                c.worldCamera=Camera.main;
+                
+                GameObject text = new GameObject();
+                text.name = "text";
+                text.transform.parent = c.transform;
+                //Debug.Log(Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));
+                text.transform.localPosition = Vector3.zero;
+                text.AddComponent<Text>();
+                text.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 200);
+                text.GetComponent<Text>().text = textBoxText;
+                text.GetComponent<Text>().color = Color.black;
+                text.GetComponent<Text>().font = Font.CreateDynamicFontFromOSFont("Arial",40);
+                text.GetComponent<Text>().fontSize = 40;
+                text.GetComponent<RectTransform>().rect.Set(0,0,100 ,50);
+                c.GetComponent<RectTransform>().localScale = new Vector3(.01f, .01f, .01f);
+                temp.transform.position = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1);
+                text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+                textMode = false;
+                Cursor.SetCursor(penCursorTexture, cursorHotspot, CursorMode.Auto);
+            }
+        }
+
         if (Input.GetMouseButton(0))
         {                                           
             paintMode = true;
             pen.positionCount = ++drawPoints;
-            pen.SetPosition(drawPoints - 1, Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));                            
+            pen.SetPosition(drawPoints - 1, Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));            
         }
         
         if (Input.GetMouseButtonUp(0))
@@ -74,6 +124,14 @@ public class paintManager : MonoBehaviour
     {
         string fileName=fileNames.text;
         saveFile(fileName);
+    }
+
+    public void TextBoxButton(UnityEngine.UI.InputField fileNames)
+    {
+        string fileName = fileNames.text;
+        textBoxText = fileName;        
+        TextBoxPanel.SetActive(false);
+        textMode = true;
     }
 
     void EnableMenu()
