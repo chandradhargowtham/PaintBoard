@@ -1,5 +1,5 @@
 # PaintBoard v1.1
-A paint application buit on Unity and C#.
+A paint application built on Unity and C#.
 
 Features:
 1. Works on Windows,Mac,iPhone,iPad and Android devices (Windows and Android save locations not updated - might need to change locations)
