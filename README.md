@@ -16,3 +16,10 @@ Upcoming Features:
 
 Known Issues:
 1. Saved image on iPhone and iPad will have a small discolored bezel on the top (having issues cropping out the menu from the captured image) - will be fixed as a priority.
+
+Currently Working on:
+1. Edit History - Lists all objects (lines/text) and then adjust the transforms,delete and duplicate - other specific attributes:
+  a. Text boxes must have edit text,font style,size and resize options.
+  b. Lines will have color change option.
+ 
+2. Save code is a little ameteurish and unstructured. Also mobile save option has sync issues - will sort those out.
