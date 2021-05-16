@@ -271,7 +271,7 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: d6e1bce095ed096b57ed1881981285ac
+      Hash: a71b12279ab5dfe858410137f21da891
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: paintManager

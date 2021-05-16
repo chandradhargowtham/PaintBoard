@@ -148,9 +148,9 @@ static Il2CppMethodPointer s_methodPointers[64] =
 };
 static const int32_t s_InvokerIndices[64] = 
 {
-	1814,
-	1894,
-	1894,
+	1815,
+	1895,
+	1895,
 	-1,
 	-1,
 	-1,
@@ -298,7 +298,7 @@ static const Il2CppRGCTXDefinition s_rgctxValues[82] =
 	{ (Il2CppRGCTXDataType)3, 2063 },
 	{ (Il2CppRGCTXDataType)2, 787 },
 	{ (Il2CppRGCTXDataType)3, 2060 },
-	{ (Il2CppRGCTXDataType)3, 5627 },
+	{ (Il2CppRGCTXDataType)3, 5630 },
 	{ (Il2CppRGCTXDataType)2, 520 },
 	{ (Il2CppRGCTXDataType)3, 1371 },
 	{ (Il2CppRGCTXDataType)1, 694 },

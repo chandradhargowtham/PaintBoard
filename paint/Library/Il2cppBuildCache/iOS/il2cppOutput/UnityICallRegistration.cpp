@@ -230,6 +230,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Canvas_set_referencePixelsPerUnit();
 		Register_UnityEngine_Canvas_set_referencePixelsPerUnit();
 
+		//System.Void UnityEngine.Canvas::set_renderMode(UnityEngine.RenderMode)
+		void Register_UnityEngine_Canvas_set_renderMode();
+		Register_UnityEngine_Canvas_set_renderMode();
+
 		//System.Void UnityEngine.Canvas::set_scaleFactor(System.Single)
 		void Register_UnityEngine_Canvas_set_scaleFactor();
 		Register_UnityEngine_Canvas_set_scaleFactor();
@@ -241,6 +245,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Canvas::set_sortingOrder(System.Int32)
 		void Register_UnityEngine_Canvas_set_sortingOrder();
 		Register_UnityEngine_Canvas_set_sortingOrder();
+
+		//System.Void UnityEngine.Canvas::set_worldCamera(UnityEngine.Camera)
+		void Register_UnityEngine_Canvas_set_worldCamera();
+		Register_UnityEngine_Canvas_set_worldCamera();
 
 		//UnityEngine.Camera UnityEngine.Canvas::get_worldCamera()
 		void Register_UnityEngine_Canvas_get_worldCamera();
@@ -442,6 +450,10 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.Cursor
 
+		//System.Void UnityEngine.Cursor::SetCursor_Injected(UnityEngine.Texture2D,UnityEngine.Vector2&,UnityEngine.CursorMode)
+		void Register_UnityEngine_Cursor_SetCursor_Injected();
+		Register_UnityEngine_Cursor_SetCursor_Injected();
+
 		//UnityEngine.CursorLockMode UnityEngine.Cursor::get_lockState()
 		void Register_UnityEngine_Cursor_get_lockState();
 		Register_UnityEngine_Cursor_get_lockState();
@@ -585,6 +597,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Int32 UnityEngine.Font::get_fontSize()
 		void Register_UnityEngine_Font_get_fontSize();
 		Register_UnityEngine_Font_get_fontSize();
+
+		//System.Void UnityEngine.Font::Internal_CreateDynamicFont(UnityEngine.Font,System.String[],System.Int32)
+		void Register_UnityEngine_Font_Internal_CreateDynamicFont();
+		Register_UnityEngine_Font_Internal_CreateDynamicFont();
 
 		//UnityEngine.Material UnityEngine.Font::get_material()
 		void Register_UnityEngine_Font_get_material();
@@ -821,6 +837,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Boolean UnityEngine.Input::GetButtonDown(System.String)
 		void Register_UnityEngine_Input_GetButtonDown();
 		Register_UnityEngine_Input_GetButtonDown();
+
+		//System.Boolean UnityEngine.Input::GetKeyInt(UnityEngine.KeyCode)
+		void Register_UnityEngine_Input_GetKeyInt();
+		Register_UnityEngine_Input_GetKeyInt();
 
 		//System.Boolean UnityEngine.Input::GetMouseButton(System.Int32)
 		void Register_UnityEngine_Input_GetMouseButton();
@@ -2001,6 +2021,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Transform::set_localScale_Injected(UnityEngine.Vector3&)
 		void Register_UnityEngine_Transform_set_localScale_Injected();
 		Register_UnityEngine_Transform_set_localScale_Injected();
+
+		//System.Void UnityEngine.Transform::set_position_Injected(UnityEngine.Vector3&)
+		void Register_UnityEngine_Transform_set_position_Injected();
+		Register_UnityEngine_Transform_set_position_Injected();
 
 		//UnityEngine.Transform UnityEngine.Transform::GetChild(System.Int32)
 		void Register_UnityEngine_Transform_GetChild();

@@ -7,6 +7,9 @@ using NativeGalleryNamespace;
 #endif
 public class paintManager : MonoBehaviour
 {
+    #region variable_declarations
+
+    // runtime required vars
     public Material currentPen;
     public List<Material> penList;
     bool paintMode;
@@ -14,20 +17,27 @@ public class paintManager : MonoBehaviour
     LineRenderer pen;
     int drawPoints;
     int noOfStrokes;
-    public Button MenuSaveOption;
+    // Unused currently - Shows confirmation after save 
     public Text saveConfirmText;
 
+
     // TextBox related vars
-    string textBoxText;
+    string textBoxTextContent;
     Vector3 textboxPosition;
     public Texture2D textCursorTexture;
     public Texture2D penCursorTexture;
     Vector2 cursorHotspot = new Vector2(0, 31);
+    
 
     // UI Items
     public GameObject MenuPanel;
     public GameObject SavePanel;
     public GameObject TextBoxPanel;
+    public Button MenuSaveOption;
+
+    // Draw History Related vars
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +54,9 @@ public class paintManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.T))
+
+        #region Textbox_create
+        if (Input.GetKey(KeyCode.T))
         {
             textMode = true;
         }
@@ -73,7 +85,7 @@ public class paintManager : MonoBehaviour
                 text.transform.localPosition = Vector3.zero;
                 text.AddComponent<Text>();
                 text.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 200);
-                text.GetComponent<Text>().text = textBoxText;
+                text.GetComponent<Text>().text = textBoxTextContent;
                 text.GetComponent<Text>().color = Color.black;
                 text.GetComponent<Text>().font = Font.CreateDynamicFontFromOSFont("Arial",40);
                 text.GetComponent<Text>().fontSize = 40;
@@ -85,7 +97,10 @@ public class paintManager : MonoBehaviour
                 Cursor.SetCursor(penCursorTexture, cursorHotspot, CursorMode.Auto);
             }
         }
+        #endregion
 
+        #region paint_related_code
+        // Paint related code
         if (Input.GetMouseButton(0))
         {                                           
             paintMode = true;
@@ -99,8 +114,11 @@ public class paintManager : MonoBehaviour
             paintMode = false;
             generateLine();
         }
+        #endregion
     }
 
+    #region Core_functional_methods
+    // paint fn (called in the Update() fn)
     void generateLine()
     {
         GameObject line = new GameObject();
@@ -115,7 +133,18 @@ public class paintManager : MonoBehaviour
         pen.endColor = currentPen.color;
     }
 
-#region Canvas Button Methods
+    public void Eraser()
+    {
+        GameObject lines = GameObject.Find("DrawContent");
+        foreach (Transform x in lines.transform)
+        {
+            Destroy(x.gameObject);
+        }
+    }
+
+    #endregion
+
+    #region Canvas Button Methods
     public void openSaveDialog()
     {
         //Done Via Button UI
@@ -129,7 +158,7 @@ public class paintManager : MonoBehaviour
     public void TextBoxButton(UnityEngine.UI.InputField fileNames)
     {
         string fileName = fileNames.text;
-        textBoxText = fileName;        
+        textBoxTextContent = fileName;        
         TextBoxPanel.SetActive(false);
         textMode = true;
     }
@@ -142,11 +171,9 @@ public class paintManager : MonoBehaviour
     {
         MenuPanel.SetActive(false);
     }
-    void saveConfirm()
-    {
-        saveConfirmText.gameObject.SetActive(false);
-    }
+    
     #endregion
+
     #region Save and Other Admin Functions
     public void saveFile()
     {
@@ -218,17 +245,14 @@ public class paintManager : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void Eraser()
+    void saveConfirm()
     {
-        GameObject lines = GameObject.Find("DrawContent");
-        foreach(Transform x in lines.transform)
-        {
-            Destroy(x.gameObject);
-        }
+        saveConfirmText.gameObject.SetActive(false);
     }
+
     #endregion
-#region Color Functionality
+
+    #region Color Functionality
     public void colorChange(string colorName)
     {
         switch(colorName)
@@ -245,5 +269,9 @@ public class paintManager : MonoBehaviour
         }
         
     }
-#endregion
+    #endregion
+
+    #region draw_history
+
+    #endregion
 }

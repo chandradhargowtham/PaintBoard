@@ -2212,6 +2212,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Canvas_get_renderMode_mAEC8A341577CC7
 	int32_t icallRetVal = _il2cpp_icall_func(__this);
 	return icallRetVal;
 }
+// System.Void UnityEngine.Canvas::set_renderMode(UnityEngine.RenderMode)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Canvas_set_renderMode_mE19EA5E3E4758704CCA6A6A2E4EB84DB75096088 (Canvas_t2B7E56B7BDC287962E092755372E214ACB6393EA * __this, int32_t ___value0, const RuntimeMethod* method)
+{
+	typedef void (*Canvas_set_renderMode_mE19EA5E3E4758704CCA6A6A2E4EB84DB75096088_ftn) (Canvas_t2B7E56B7BDC287962E092755372E214ACB6393EA *, int32_t);
+	static Canvas_set_renderMode_mE19EA5E3E4758704CCA6A6A2E4EB84DB75096088_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Canvas_set_renderMode_mE19EA5E3E4758704CCA6A6A2E4EB84DB75096088_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Canvas::set_renderMode(UnityEngine.RenderMode)");
+	_il2cpp_icall_func(__this, ___value0);
+}
 // System.Boolean UnityEngine.Canvas::get_isRootCanvas()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Canvas_get_isRootCanvas_mCAA9356718F8FEFB235F6F55347A26764B642FBF (Canvas_t2B7E56B7BDC287962E092755372E214ACB6393EA * __this, const RuntimeMethod* method)
 {
@@ -2377,6 +2386,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Camera_tC44E094BAB53AFC8A014C6F9CFCE11F4FC380
 	_il2cpp_icall_func = (Canvas_get_worldCamera_mFE4C9FDA7996FE20AC5CA3CB45B4190C40122D51_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Canvas::get_worldCamera()");
 	Camera_tC44E094BAB53AFC8A014C6F9CFCE11F4FC38006C * icallRetVal = _il2cpp_icall_func(__this);
 	return icallRetVal;
+}
+// System.Void UnityEngine.Canvas::set_worldCamera(UnityEngine.Camera)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Canvas_set_worldCamera_m799BE7D7EFD04E73CA30D6495DF4082CA7DBCAD0 (Canvas_t2B7E56B7BDC287962E092755372E214ACB6393EA * __this, Camera_tC44E094BAB53AFC8A014C6F9CFCE11F4FC38006C * ___value0, const RuntimeMethod* method)
+{
+	typedef void (*Canvas_set_worldCamera_m799BE7D7EFD04E73CA30D6495DF4082CA7DBCAD0_ftn) (Canvas_t2B7E56B7BDC287962E092755372E214ACB6393EA *, Camera_tC44E094BAB53AFC8A014C6F9CFCE11F4FC38006C *);
+	static Canvas_set_worldCamera_m799BE7D7EFD04E73CA30D6495DF4082CA7DBCAD0_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Canvas_set_worldCamera_m799BE7D7EFD04E73CA30D6495DF4082CA7DBCAD0_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Canvas::set_worldCamera(UnityEngine.Camera)");
+	_il2cpp_icall_func(__this, ___value0);
 }
 // UnityEngine.Material UnityEngine.Canvas::GetDefaultCanvasMaterial()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t8927C00353A72755313F046D0CE85178AE8218EE * Canvas_GetDefaultCanvasMaterial_mDC0AEDDC12EBC11F089168A32C0D9C955DCF1080 (const RuntimeMethod* method)
