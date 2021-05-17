@@ -1,2 +1,4 @@
-Paint/temp/*
-Paint/library/
+paint/Temp/*
+paint/Library/*
+paint/Temp
+paint/Library

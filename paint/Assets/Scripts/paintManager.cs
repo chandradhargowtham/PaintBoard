@@ -10,22 +10,21 @@ public class paintManager : MonoBehaviour
     #region variable_declarations
 
     // runtime required vars
+    GameObject currentHistoryItem;
     public Material currentPen;
-    public List<Material> penList;
-    bool paintMode;
-    bool textMode;
+    public List<Material> penList;    
     LineRenderer pen;
-    int drawPoints;
-    int noOfStrokes;
+    int drawPoints;       
     // Unused currently - Shows confirmation after save 
     public Text saveConfirmText;
 
+    // Counters
+    int textBoxCounter;
+    int noOfStrokesCounter;
 
     // TextBox related vars
     string textBoxTextContent;
-    Vector3 textboxPosition;
-    public Texture2D textCursorTexture;
-    public Texture2D penCursorTexture;
+    Vector3 textboxPosition;    
     Vector2 cursorHotspot = new Vector2(0, 31);
     
 
@@ -33,9 +32,23 @@ public class paintManager : MonoBehaviour
     public GameObject MenuPanel;
     public GameObject SavePanel;
     public GameObject TextBoxPanel;
+    public GameObject DrawHistoryPanel;
+    public GameObject EditOptionsPanel;
     public Button MenuSaveOption;
 
     // Draw History Related vars
+    public GameObject historyItem;
+
+    // Flags
+    bool paintMode;
+    bool textMode;
+    bool moveMode;
+    bool historyMode;
+
+    // Cursors
+    public Texture2D textCursorTexture;
+    public Texture2D penCursorTexture;
+    public Texture2D moveCursorTexture;
 
     #endregion
 
@@ -54,6 +67,19 @@ public class paintManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Constantly checks if paint mode is enabled or not - Doesnt let us paint if any other dialogs or functions are active
+        if (textMode || moveMode || historyMode)
+        {
+            paintMode = false;
+        }
+        else
+        {
+            paintMode = true;
+        }
+
+        // Delete Object hotkeys
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace))
+            deleteObject();
 
         #region Textbox_create
         if (Input.GetKey(KeyCode.T))
@@ -63,14 +89,14 @@ public class paintManager : MonoBehaviour
 
         if(textMode)
         {
-            Cursor.SetCursor(textCursorTexture,cursorHotspot, CursorMode.Auto);
+            Cursor.SetCursor(textCursorTexture,Vector2.zero, CursorMode.Auto);
             if (Input.GetMouseButton(0))
             {
-                Debug.Log("Text");
-                
+                Debug.Log("Text");                
                 GameObject temp = new GameObject();
                 temp.gameObject.transform.parent= GameObject.Find("DrawContent").transform;
-                temp.gameObject.name = "TextBox";
+                temp.gameObject.name = "TextBox"+textBoxCounter;
+                textBoxCounter++;
                 temp.AddComponent<Canvas>();
                 temp.AddComponent<CanvasScaler>();
                 temp.AddComponent<GraphicRaycaster>();
@@ -94,25 +120,64 @@ public class paintManager : MonoBehaviour
                 temp.transform.position = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1);
                 text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
                 textMode = false;
+
                 Cursor.SetCursor(penCursorTexture, cursorHotspot, CursorMode.Auto);
+
+                // Add to history
+                GameObject newHistoryItem = Instantiate(historyItem);
+                newHistoryItem.transform.parent = historyItem.transform.parent;
+                newHistoryItem.name = temp.name;
+                newHistoryItem.GetComponentInChildren<Text>().text= temp.name;
+                newHistoryItem.SetActive(true);
+                
             }
         }
         #endregion
 
-        #region paint_related_code
+        #region Draw_related_code
         // Paint related code
-        if (Input.GetMouseButton(0))
-        {                                           
-            paintMode = true;
+
+        if (Input.GetMouseButton(0) && pen!=null && paintMode)
+        {                                                       
             pen.positionCount = ++drawPoints;
             pen.SetPosition(drawPoints - 1, Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));            
         }
         
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && paintMode)
         {
             drawPoints = 0;
             paintMode = false;
             generateLine();
+        }
+        #endregion
+
+        #region Transform_Functional_Code
+        if(moveMode)
+        {
+            // setCursor first
+            Cursor.SetCursor(moveCursorTexture, Vector2.zero, CursorMode.Auto);
+            if (Input.GetMouseButton(0) && currentHistoryItem!=null)
+            {
+                Debug.Log("Entered move transform");
+                GameObject tempobj = GameObject.Find("DrawContent").transform.Find(currentHistoryItem.name).gameObject;
+                if(tempobj.name.Contains("Text"))
+                {
+                    tempobj.transform.position = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1);
+                    moveMode = false;                                        
+                    Cursor.SetCursor(penCursorTexture, cursorHotspot, CursorMode.Auto);
+                }
+                else if(tempobj.name.Contains("Line"))
+                {
+                    // Line
+                    //tempobj.GetComponent<LineRenderer>().useWorldSpace = true;
+                    moveMode = false;
+                    Cursor.SetCursor(penCursorTexture, cursorHotspot, CursorMode.Auto);
+                }
+
+
+            }
+
+            
         }
         #endregion
     }
@@ -122,7 +187,7 @@ public class paintManager : MonoBehaviour
     void generateLine()
     {
         GameObject line = new GameObject();
-        line.name = "Line"+(noOfStrokes++);
+        line.name = "Line"+(noOfStrokesCounter++);
         line.AddComponent<LineRenderer>();
         line.transform.parent = GameObject.Find("DrawContent").transform;
         pen = line.GetComponent<LineRenderer>();
@@ -131,6 +196,15 @@ public class paintManager : MonoBehaviour
         pen.endWidth = 0.1f;
         pen.startColor = currentPen.color;
         pen.endColor = currentPen.color;
+        
+
+        // Add to history
+        GameObject newHistoryItem = Instantiate(historyItem);
+        newHistoryItem.transform.parent = historyItem.transform.parent;
+        newHistoryItem.name = line.name;
+        newHistoryItem.GetComponentInChildren<Text>().text = line.name;        
+        newHistoryItem.SetActive(true);        
+        
     }
 
     public void Eraser()
@@ -140,17 +214,80 @@ public class paintManager : MonoBehaviour
         {
             Destroy(x.gameObject);
         }
+
+        foreach(Transform x in DrawHistoryPanel.transform)
+        {
+            if(x.gameObject.activeSelf)
+                Destroy(x.gameObject);
+        }
     }
+
+    #region Color Functionality
+    public void colorChange(string colorName)
+    {
+        switch (colorName)
+        {
+            case "Red": currentPen = penList[0]; break;
+            case "Blue": currentPen = penList[1]; break;
+            case "Black": currentPen = penList[2]; break;
+            case "Yellow": currentPen = penList[3]; break;
+            case "White": currentPen = penList[4]; break;
+            case "Orange": currentPen = penList[5]; break;
+            case "LightGreen": currentPen = penList[6]; break;
+            case "DarkGreen": currentPen = penList[7]; break;
+
+        }
+
+    }
+    #endregion
+
+    #region draw_history
+
+    // method is assigned to the toggle
+    public void assignCurrentHistoryItem(GameObject g)
+    {
+        currentHistoryItem = g;
+        Debug.Log("CurrentSelected: " + currentHistoryItem);
+    }
+
+    public void deleteObject()
+    {
+        if (currentHistoryItem != null)
+        {
+            foreach (Transform x in GameObject.Find("DrawContent").transform)
+            {
+                if (x.name.Equals(currentHistoryItem.name))
+                {
+                    Destroy(x.gameObject);
+                }
+            }
+
+            foreach (Transform x in DrawHistoryPanel.transform)
+            {
+                if (x.name.Equals(currentHistoryItem.name))
+                {
+                    Destroy(x.gameObject);
+                }
+            }
+            currentHistoryItem = null;
+        }
+    }
+
+    public void moveObject()
+    {
+        moveMode = true;
+    }
+    #endregion
 
     #endregion
 
-    #region Canvas Button Methods
+    #region UI Canvas Button Methods
     public void openSaveDialog()
     {
         //Done Via Button UI
     }
     public void saveButton(UnityEngine.UI.InputField fileNames)
-    {
+    {       
         string fileName=fileNames.text;
         saveFile(fileName);
     }
@@ -161,6 +298,13 @@ public class paintManager : MonoBehaviour
         textBoxTextContent = fileName;        
         TextBoxPanel.SetActive(false);
         textMode = true;
+    }
+
+    public void toggleHistoryUI()
+    {
+        DrawHistoryPanel.SetActive(!DrawHistoryPanel.active);
+        EditOptionsPanel.SetActive(!EditOptionsPanel.active);
+        historyMode=!historyMode;
     }
 
     void EnableMenu()
@@ -252,26 +396,5 @@ public class paintManager : MonoBehaviour
 
     #endregion
 
-    #region Color Functionality
-    public void colorChange(string colorName)
-    {
-        switch(colorName)
-        {
-            case "Red": currentPen = penList[0];  break;
-            case "Blue": currentPen = penList[1]; break;
-            case "Black": currentPen = penList[2]; break;
-            case "Yellow": currentPen = penList[3]; break;
-            case "White": currentPen = penList[4]; break;
-            case "Orange": currentPen = penList[5]; break;
-            case "LightGreen": currentPen = penList[6]; break;
-            case "DarkGreen": currentPen = penList[7]; break;
-
-        }
-        
-    }
-    #endregion
-
-    #region draw_history
-
-    #endregion
+    
 }
