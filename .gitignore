@@ -1,4 +1,4 @@
-paint/Temp/*
-paint/Library/*
-paint/Temp
-paint/Library
+/Library/
+/Temp/
+paint/Library/
+paint/Temp/

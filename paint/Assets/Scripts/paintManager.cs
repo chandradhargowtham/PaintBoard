@@ -33,6 +33,7 @@ public class paintManager : MonoBehaviour
     public GameObject SavePanel;
     public GameObject TextBoxPanel;
     public GameObject DrawHistoryPanel;
+    public GameObject DrawHistoryPanelScrollView;
     public GameObject EditOptionsPanel;
     public Button MenuSaveOption;
 
@@ -44,7 +45,7 @@ public class paintManager : MonoBehaviour
     bool textMode;
     bool moveMode;
     bool historyMode;
-
+    bool isPainting;
     // Cursors
     public Texture2D textCursorTexture;
     public Texture2D penCursorTexture;
@@ -56,6 +57,7 @@ public class paintManager : MonoBehaviour
     void Start()
     {
         Camera.main.orthographic = transform;
+        paintMode = true;
         colorChange("Red");
         generateLine();        
     // If the platform is IOS, a new listener is added - else the existing save listener which is attached in the scene inspector will be used
@@ -68,7 +70,7 @@ public class paintManager : MonoBehaviour
     void Update()
     {
         // Constantly checks if paint mode is enabled or not - Doesnt let us paint if any other dialogs or functions are active
-        if (textMode || moveMode || historyMode)
+        if (textMode || moveMode || historyMode || TextBoxPanel.active)
         {
             paintMode = false;
         }
@@ -77,9 +79,14 @@ public class paintManager : MonoBehaviour
             paintMode = true;
         }
 
-        // Delete Object hotkeys
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace))
+        // Delete hotkeys
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Backspace) || Input.GetKey(KeyCode.Delete))
+        {
             deleteObject();
+        }
+
+
+
 
         #region Textbox_create
         if (Input.GetKey(KeyCode.T))
@@ -87,12 +94,12 @@ public class paintManager : MonoBehaviour
             textMode = true;
         }
 
-        if(textMode)
+        if(textMode &&!paintMode)
         {
             Cursor.SetCursor(textCursorTexture,Vector2.zero, CursorMode.Auto);
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0)&& !paintMode)
             {
-                Debug.Log("Text");                
+                //Debug.Log("Text");                
                 GameObject temp = new GameObject();
                 temp.gameObject.transform.parent= GameObject.Find("DrawContent").transform;
                 temp.gameObject.name = "TextBox"+textBoxCounter;
@@ -137,22 +144,26 @@ public class paintManager : MonoBehaviour
         #region Draw_related_code
         // Paint related code
 
-        if (Input.GetMouseButton(0) && pen!=null && paintMode)
+        if (Input.GetMouseButton(0) && pen!=null && paintMode && !textMode)
         {                                                       
             pen.positionCount = ++drawPoints;
-            pen.SetPosition(drawPoints - 1, Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));            
+            pen.SetPosition(drawPoints - 1, Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));
+            isPainting = true;
+            
         }
-        
-        if (Input.GetMouseButtonUp(0) && paintMode)
+        if (Input.GetMouseButtonUp(0) && isPainting && !textMode)
         {
             drawPoints = 0;
-            paintMode = false;
             generateLine();
+            paintMode = false;
+            isPainting = false;
         }
+
+
         #endregion
 
         #region Transform_Functional_Code
-        if(moveMode)
+        if (moveMode)
         {
             // setCursor first
             Cursor.SetCursor(moveCursorTexture, Vector2.zero, CursorMode.Auto);
@@ -194,8 +205,9 @@ public class paintManager : MonoBehaviour
         pen.material = currentPen;
         pen.startWidth = 0.1f;
         pen.endWidth = 0.1f;
-        pen.startColor = currentPen.color;
+        pen.startColor= currentPen.color;
         pen.endColor = currentPen.color;
+        
         
 
         // Add to history
@@ -298,13 +310,15 @@ public class paintManager : MonoBehaviour
         textBoxTextContent = fileName;        
         TextBoxPanel.SetActive(false);
         textMode = true;
+        
     }
 
     public void toggleHistoryUI()
     {
         DrawHistoryPanel.SetActive(!DrawHistoryPanel.active);
         EditOptionsPanel.SetActive(!EditOptionsPanel.active);
-        historyMode=!historyMode;
+        DrawHistoryPanelScrollView.SetActive(!DrawHistoryPanelScrollView.active);
+        historyMode =!historyMode;
     }
 
     void EnableMenu()
@@ -314,6 +328,11 @@ public class paintManager : MonoBehaviour
     void wait()
     {
         MenuPanel.SetActive(false);
+    }
+    public void setTextMode()
+    {
+        textMode = true;
+        paintMode = false;
     }
     
     #endregion
