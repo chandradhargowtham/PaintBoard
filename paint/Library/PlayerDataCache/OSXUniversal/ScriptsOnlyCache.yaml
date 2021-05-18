@@ -13,10 +13,15 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.ToggleGroup
@@ -53,11 +58,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1494}
     - Class: 114
+      Script: {instanceID: 1522}
+    - Class: 114
       Script: {instanceID: 1632}
+    - Class: 114
+      Script: {instanceID: 1644}
     - Class: 114
       Script: {instanceID: 2162}
     - Class: 114
       Script: {instanceID: 2224}
+    - Class: 114
+      Script: {instanceID: 2370}
+    - Class: 114
+      Script: {instanceID: 2562}
     - Class: 114
       Script: {instanceID: 2644}
     - Class: 114
@@ -68,6 +81,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3126}
     - Class: 114
       Script: {instanceID: 3372}
+    - Class: 114
+      Script: {instanceID: 3386}
     - Class: 114
       Script: {instanceID: 3490}
     - Class: 114
@@ -271,7 +286,7 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: a71b12279ab5dfe858410137f21da891
+      Hash: b12c36869aaab486aeffd592f3a402f4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: paintManager

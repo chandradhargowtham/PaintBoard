@@ -131,11 +131,15 @@ public class paintManager : MonoBehaviour
                 Cursor.SetCursor(penCursorTexture, cursorHotspot, CursorMode.Auto);
 
                 // Add to history
-                GameObject newHistoryItem = Instantiate(historyItem);
-                newHistoryItem.transform.parent = historyItem.transform.parent;
-                newHistoryItem.name = temp.name;
-                newHistoryItem.GetComponentInChildren<Text>().text= temp.name;
-                newHistoryItem.SetActive(true);
+                if(!temp.name.Contains("0"))
+                {
+                    GameObject newHistoryItem = Instantiate(historyItem);
+                    newHistoryItem.transform.parent = historyItem.transform.parent;
+                    newHistoryItem.name = temp.name;
+                    newHistoryItem.GetComponentInChildren<Text>().text = temp.name;
+                    newHistoryItem.SetActive(true);
+                }
+                
                 
             }
         }
@@ -144,8 +148,12 @@ public class paintManager : MonoBehaviour
         #region Draw_related_code
         // Paint related code
 
-        if (Input.GetMouseButton(0) && pen!=null && paintMode && !textMode)
-        {                                                       
+        if (Input.GetMouseButton(0)  && paintMode && !textMode)
+        {
+            if(pen==null)
+            {
+                generateLine();
+            }
             pen.positionCount = ++drawPoints;
             pen.SetPosition(drawPoints - 1, Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(1));
             isPainting = true;
@@ -260,6 +268,18 @@ public class paintManager : MonoBehaviour
     {
         currentHistoryItem = g;
         Debug.Log("CurrentSelected: " + currentHistoryItem);
+        if(historyItem!=null)
+            EditOptionsPanel.SetActive(true);
+        else
+            EditOptionsPanel.SetActive(true);
+
+        if (g.name.Contains("Text"))
+        {
+            EditOptionsPanel.transform.Find("TransformButton").gameObject.SetActive(true);
+        }else if (g.name.Contains("Line"))
+        {
+            EditOptionsPanel.transform.Find("TransformButton").gameObject.SetActive(false);
+        }
     }
 
     public void deleteObject()
@@ -316,7 +336,14 @@ public class paintManager : MonoBehaviour
     public void toggleHistoryUI()
     {
         DrawHistoryPanel.SetActive(!DrawHistoryPanel.active);
-        EditOptionsPanel.SetActive(!EditOptionsPanel.active);
+        if(DrawHistoryPanel.active)
+        {
+            EditOptionsPanel.SetActive(true);
+        }else
+        {
+            EditOptionsPanel.SetActive(false);
+        }
+        
         DrawHistoryPanelScrollView.SetActive(!DrawHistoryPanelScrollView.active);
         historyMode =!historyMode;
     }

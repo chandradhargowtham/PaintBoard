@@ -40,27 +40,29 @@ extern void paintManager_toggleHistoryUI_m60E484A2B9D93C5CDF0C32B39851D5DD0397A7
 extern void paintManager_EnableMenu_mCC1187B40B1DC3B392397566729DEAA58AF05B1E (void);
 // 0x0000000E System.Void paintManager::wait()
 extern void paintManager_wait_m31A5331014853CCBC91B049359B0C7572B19901A (void);
-// 0x0000000F System.Void paintManager::saveFile()
+// 0x0000000F System.Void paintManager::setTextMode()
+extern void paintManager_setTextMode_mDFACB33B1D5CD5C10BDC0E4F148601E081875AD2 (void);
+// 0x00000010 System.Void paintManager::saveFile()
 extern void paintManager_saveFile_m23CE24AD82909EC0B818A5092D68228EBAD5EF99 (void);
-// 0x00000010 System.Void paintManager::saveFile(System.String)
+// 0x00000011 System.Void paintManager::saveFile(System.String)
 extern void paintManager_saveFile_m130E07BBCD4846D5D819FA951892E324F8472043 (void);
-// 0x00000011 System.Void paintManager::cancelSave()
+// 0x00000012 System.Void paintManager::cancelSave()
 extern void paintManager_cancelSave_mAB210069ABBFDE8BD523413BE27A1B127959CEEB (void);
-// 0x00000012 System.Void paintManager::Quit()
+// 0x00000013 System.Void paintManager::Quit()
 extern void paintManager_Quit_m0CAB1C801B78BA2E6BF25D002B9E77938CA28869 (void);
-// 0x00000013 System.Void paintManager::saveConfirm()
+// 0x00000014 System.Void paintManager::saveConfirm()
 extern void paintManager_saveConfirm_mAAC71D7646B5C99136B4167EC1819DF93CC5EF67 (void);
-// 0x00000014 System.Void paintManager::.ctor()
+// 0x00000015 System.Void paintManager::.ctor()
 extern void paintManager__ctor_m0D11325C85A4C53375597EFC1EE7308D4EE52FEE (void);
-// 0x00000015 System.Void paintManager/<>c::.cctor()
+// 0x00000016 System.Void paintManager/<>c::.cctor()
 extern void U3CU3Ec__cctor_m5A290A35181C3DB8C258ED2210D4558156CBB093 (void);
-// 0x00000016 System.Void paintManager/<>c::.ctor()
+// 0x00000017 System.Void paintManager/<>c::.ctor()
 extern void U3CU3Ec__ctor_m7F3241A2A7FAE6AAEAE76897BFC9A29AA185AAF1 (void);
-// 0x00000017 System.Void paintManager/<>c::<saveFile>b__41_0(System.Boolean,System.String)
-extern void U3CU3Ec_U3CsaveFileU3Eb__41_0_mB0E6D60916B1969CF540C228A0BCDCC39EBB9AAE (void);
-// 0x00000018 System.UInt32 <PrivateImplementationDetails>::ComputeStringHash(System.String)
+// 0x00000018 System.Void paintManager/<>c::<saveFile>b__43_0(System.Boolean,System.String)
+extern void U3CU3Ec_U3CsaveFileU3Eb__43_0_mA59CAFD2EA779D90BE6327CC3EDBB38192074EA1 (void);
+// 0x00000019 System.UInt32 <PrivateImplementationDetails>::ComputeStringHash(System.String)
 extern void U3CPrivateImplementationDetailsU3E_ComputeStringHash_mD94B0E22EF32AD3DFD277ED8E911B5DFA4CDB91E (void);
-static Il2CppMethodPointer s_methodPointers[24] = 
+static Il2CppMethodPointer s_methodPointers[25] = 
 {
 	paintManager_Start_mA900DE780ACDC8FB6F41E27A9D337152B30A584C,
 	paintManager_Update_m94FD962EDFA9F21E052999C8A996D61010008201,
@@ -76,6 +78,7 @@ static Il2CppMethodPointer s_methodPointers[24] =
 	paintManager_toggleHistoryUI_m60E484A2B9D93C5CDF0C32B39851D5DD0397A72F,
 	paintManager_EnableMenu_mCC1187B40B1DC3B392397566729DEAA58AF05B1E,
 	paintManager_wait_m31A5331014853CCBC91B049359B0C7572B19901A,
+	paintManager_setTextMode_mDFACB33B1D5CD5C10BDC0E4F148601E081875AD2,
 	paintManager_saveFile_m23CE24AD82909EC0B818A5092D68228EBAD5EF99,
 	paintManager_saveFile_m130E07BBCD4846D5D819FA951892E324F8472043,
 	paintManager_cancelSave_mAB210069ABBFDE8BD523413BE27A1B127959CEEB,
@@ -84,10 +87,10 @@ static Il2CppMethodPointer s_methodPointers[24] =
 	paintManager__ctor_m0D11325C85A4C53375597EFC1EE7308D4EE52FEE,
 	U3CU3Ec__cctor_m5A290A35181C3DB8C258ED2210D4558156CBB093,
 	U3CU3Ec__ctor_m7F3241A2A7FAE6AAEAE76897BFC9A29AA185AAF1,
-	U3CU3Ec_U3CsaveFileU3Eb__41_0_mB0E6D60916B1969CF540C228A0BCDCC39EBB9AAE,
+	U3CU3Ec_U3CsaveFileU3Eb__43_0_mA59CAFD2EA779D90BE6327CC3EDBB38192074EA1,
 	U3CPrivateImplementationDetailsU3E_ComputeStringHash_mD94B0E22EF32AD3DFD277ED8E911B5DFA4CDB91E,
 };
-static const int32_t s_InvokerIndices[24] = 
+static const int32_t s_InvokerIndices[25] = 
 {
 	1128,
 	1128,
@@ -100,6 +103,7 @@ static const int32_t s_InvokerIndices[24] =
 	1128,
 	968,
 	968,
+	1128,
 	1128,
 	1128,
 	1128,
@@ -119,7 +123,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	24,
+	25,
 	s_methodPointers,
 	0,
 	NULL,
