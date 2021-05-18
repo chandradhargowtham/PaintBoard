@@ -2,7 +2,7 @@
 A paint application built on Unity and C#.
 
 Features:
-1. Works on Windows,Mac,iPhone,iPad and Android devices (Windows and Android save locations not updated - might need to change locations)
+1. Works on Windows,Mac,Linux,(tested on Lubuntu),iPhone,iPad and Android devices (Windows and Android save locations not updated - might need to change locations)
 2. Saves files as .png and .jpg(for mobile devices)
 3. Multiple color options for drawing
 4. Textbox feature added (font-arial)
