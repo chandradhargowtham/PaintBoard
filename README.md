@@ -1,4 +1,4 @@
-# PaintBoard v1.1
+# PaintBoard v1.2
 A paint application built on Unity and C#.
 
 Features:
