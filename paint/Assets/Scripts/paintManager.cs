@@ -421,7 +421,23 @@ public class paintManager : MonoBehaviour
         //Invoke("saveConfirm",2);
 #elif UNITY_EDITOR
         Texture2D ss = ScreenCapture.CaptureScreenshotAsTexture();
-            
+
+#elif UNITY_STANDALONE_LINUX
+        MenuPanel.SetActive(false);
+        if (fileName.Length < 1) fileName = "PaintBoardPicture";
+
+        if(System.IO.Directory.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures),"PaintBoard")))
+        {
+            Debug.Log("Exitst"+ System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "PaintBoard"));
+        }else
+        {
+            Debug.Log("Not Exitst");
+            System.IO.Directory.CreateDirectory(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "PaintBoard"));
+        }
+        ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures),
+        "PaintBoard/"+fileName + ".png"));
+        
+        Invoke("EnableMenu", 2);
 #else
         ScreenCapture.CaptureScreenshot(fileName + ".png");
 #endif
